@@ -1,0 +1,14 @@
+name: Build
+on: [push, pull_request]
+jobs:
+    build-Windows:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-dotnet@v1
+              with:
+                dotnet-version: '6.x'
+            - name: Build
+              run: foreach($file in (dir -Path ./ -Filter *.sln -Recurse | %{$_.FullName})) { dotnet test $file }
+            - name: Run tests
+              run: foreach($file in (dir -Path ./ -Filter *.sln -Recurse | %{$_.FullName})) { dotnet build $file }
