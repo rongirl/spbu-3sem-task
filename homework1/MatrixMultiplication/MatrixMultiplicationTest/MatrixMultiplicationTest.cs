@@ -1,8 +1,8 @@
+namespace MatrixMultiplicationTest;
+
 using NUnit.Framework;
 using System;
 using Task_1;
-
-namespace MatrixMultiplicationTest;
 
 public class Tests
 {    
@@ -15,8 +15,8 @@ public class Tests
         var matrixTwoB = new Matrix(new int[2, 2] { { 1, -1 }, { 1, -1 } });
         var expectedMatrix = new Matrix(new int[2, 2] { { 2, -2 }, { 2, -2 } });
         Assert.Throws<InvalidOperationException>(() => MatrixMultiplication.SequentiallyMultiply(matrixOneA, matrixOneB));
-        Assert.Throws<InvalidOperationException>(() => MatrixMultiplication.SequentiallyMultiply(matrixOneA, matrixOneB));
-        Assert.IsTrue(Matrix.Equal(MatrixMultiplication.ParallelMultiply(matrixTwoA, matrixTwoB), expectedMatrix));
+        Assert.Throws<InvalidOperationException>(() => MatrixMultiplication.ParallelMultiply(matrixOneA, matrixOneB));
+        Assert.IsTrue(Matrix.Equal(MatrixMultiplication.SequentiallyMultiply(matrixTwoA, matrixTwoB), expectedMatrix));
         Assert.IsTrue(Matrix.Equal(MatrixMultiplication.ParallelMultiply(matrixTwoA, matrixTwoB), expectedMatrix));
     }  
 
