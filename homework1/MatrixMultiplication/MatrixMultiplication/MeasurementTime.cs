@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+﻿namespace Task_1;
 
-namespace Task_1;
+using System.Diagnostics;
 
 /// <summary>
 /// Класс, реализующий измерение матожидания, среднего квадратичного отклонения последовательного и параллельного умножения двух матриц
 /// </summary>
-public class Measurement
+public static class Measurement
 {
     public static void MeasureTime()
     {

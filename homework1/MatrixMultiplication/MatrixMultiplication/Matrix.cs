@@ -8,27 +8,30 @@ public class Matrix
     /// <summary>
     /// Элементы в матрице
     /// </summary>
-    public int[,] Elements;
+    private int[,] elements;
 
     /// <summary>
     /// Количество строк в матрице
     /// </summary>
-    public int Rows;
+    public int Rows => elements.GetLength(0);
 
     /// <summary>
     /// Количество столбцов
     /// </summary>
-    public int Columns;
+    public int Columns => elements.GetLength(1);
 
     /// <summary>
     /// Инициализация матрицы
     /// </summary>
-    /// <param name="elements"></param>
     public Matrix(int[,] elements)
     {
-        Elements = (int[,]) elements.Clone();
-        Rows = elements.GetLength(0);   
-        Columns = elements.GetLength(1);    
+        this.elements = (int[,]) elements.Clone();
+    }
+
+    public int this [int row, int columns]
+    {
+        get => elements[row, columns];  
+        set => elements[row, columns] = value;
     }
 
     /// <summary>
@@ -64,7 +67,7 @@ public class Matrix
         {
             for (int j = 0; j < matrix.Columns; j++)
             {
-                writer.Write($"{matrix.Elements[i, j]} ");
+                writer.Write($"{matrix.elements[i, j]} ");
             }
             writer.Write("\n");
         }
@@ -106,7 +109,7 @@ public class Matrix
         {
             for (int j = 0; j < matrixA.Columns; j++)
             {
-                if (matrixA.Elements[i, j] != matrixB.Elements[i, j])
+                if (matrixA.elements[i, j] != matrixB.elements[i, j])
                 {
                     return false;
                 }

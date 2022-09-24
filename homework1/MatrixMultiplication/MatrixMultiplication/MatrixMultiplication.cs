@@ -3,7 +3,7 @@
 /// <summary>
 /// Класс, реализующий последовательное и параллельное умножение двух матриц
 /// </summary>
-public class MatrixMultiplication
+public static class MatrixMultiplication
 {
     /// <summary>
     /// Последовательно перемножает матрицы
@@ -21,7 +21,7 @@ public class MatrixMultiplication
             {
                 for (int k = 0; k < matrixA.Columns; k++)
                 {
-                    resultElements[i, j] += matrixA.Elements[i, k] * matrixB.Elements[k, j];  
+                    resultElements[i, j] += matrixA[i, k] * matrixB[k, j];  
                 }
             }
         }
@@ -38,7 +38,8 @@ public class MatrixMultiplication
             throw new InvalidOperationException("Количество столбцов первой матрицы не равно количеству строк второй.");
         }
         var resultElements = new int[matrixA.Rows, matrixB.Columns];
-        var threads = new Thread[Environment.ProcessorCount];
+        int countOfThreads = matrixA.Rows < Environment.ProcessorCount ? matrixA.Rows : Environment.ProcessorCount;
+        var threads = new Thread[countOfThreads];
         var chunkSize = matrixA.Rows / threads.Length + 1;
         for (var i = 0; i < threads.Length; ++i)
         {
@@ -51,7 +52,7 @@ public class MatrixMultiplication
                     {
                         for (int h = 0; h < matrixB.Columns; h++)
                         {
-                            resultElements[j, h] += matrixA.Elements[j, k] * matrixB.Elements[k, h];
+                            resultElements[j, h] += matrixA[j, k] * matrixB[k, h];
                         }
                     }
                 }
