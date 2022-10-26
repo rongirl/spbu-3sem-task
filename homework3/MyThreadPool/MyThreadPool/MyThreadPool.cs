@@ -127,7 +127,7 @@ public class MyThreadPool
                     {
                         if (continuationOfTask.TryDequeue(out var taskRun))
                         {
-                            threadPool.actions.Enqueue(taskRun); //как работают потоки с задачи в тредпуле 
+                            threadPool.actions.Enqueue(taskRun); 
                         }
                     }
                 }
