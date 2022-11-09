@@ -10,8 +10,8 @@ public class Tests
         public void ComputeSingleThreadTest()
         {
             string path = "C:/Users/Acer/source/repos/spbu-3sem-tasks/MD5";
-            var checkSum1 = CheckSum.CalculateSingleThread("C:/Users/Acer/source/repos/spbu-3sem-tasks/MD5");
-            var checkSum2 = CheckSum.CalculateSingleThread("C:/Users/Acer/source/reposspbu-3sem-tasks/MD5");
+            var checkSum1 = CheckSum.CalculateSingleThread(path);
+            var checkSum2 = CheckSum.CalculateSingleThread(path);
             Assert.AreEqual(checkSum1, checkSum2);
         }
 
