@@ -7,7 +7,7 @@ using System;
 /// </summary>
 public class LazyWithThreads<T> : ILazy<T>
 {   
-    private bool isCalculated = false;
+    private volatile bool isCalculated = false;
 
     /// <summary>
     /// Функция вычисления
@@ -38,6 +38,7 @@ public class LazyWithThreads<T> : ILazy<T>
                 return result;
             }
             result = supplier();
+            supplier = null;
             isCalculated = true;
             return result;
         }

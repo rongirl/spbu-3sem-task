@@ -52,7 +52,7 @@ public class Tests
     {
         int value = 1;
         var threads = new Thread[System.Environment.ProcessorCount];
-        LazyWithThreads<int> lazy = new LazyWithThreads<int>(() => ++value);
+        LazyWithThreads<int> lazy = new LazyWithThreads<int>(() => Interlocked.Increment(ref value));
         for (var i = 0; i < threads.Length; ++i)
         {
             threads[i] = new Thread(() =>

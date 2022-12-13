@@ -31,6 +31,7 @@ public class Lazy<T> : ILazy<T>
             return result;
         }
         result = supplier();
+        supplier = null;
         isCalculated = true;
         return result;
     }
