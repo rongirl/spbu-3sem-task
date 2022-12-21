@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Task_3;
+namespace test;
 
 public class ConcurrentPriorityQueue<TElement, TPriority>
 {
