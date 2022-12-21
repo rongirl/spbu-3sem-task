@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using test;
 using System.Collections;
+using System.Threading;
+using System;
 
 namespace ConcurrentPriorityQueueTest;
 
@@ -24,6 +26,34 @@ public class Tests
         Assert.AreEqual(29293, queue.Dequeue());
         Assert.AreEqual(100, queue.Dequeue());
     }
+
+    [Test]
+    public void TestWithThreads()
+    {
+        var threads = new Thread[Environment.ProcessorCount];
+        for (int i = 0; i < threads.Length; ++i)
+        {
+            var localI = i;
+            threads[i] = new Thread(() =>
+            {
+                queue.Enqueue(localI, 10 + localI);
+            });
+        }
+        foreach (var thread in threads)
+        {
+            thread.Start();
+        }
+        foreach (var thread in threads)
+        {
+            thread.Join();
+        }
+        for (int i = 0; i < Environment.ProcessorCount; i++)
+        {
+            Assert.AreEqual(Environment.ProcessorCount - i - 1, queue.Dequeue());
+        }
+        Assert.AreEqual(0, queue.Size);
+    }
+
 
     [Test]
     public void SizeOfQueue()
