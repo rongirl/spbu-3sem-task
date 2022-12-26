@@ -1,13 +1,11 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-namespace FTP;
+namespace FTPServer;
 
 public class Server
 { 
     private readonly TcpListener listener;
-    private readonly IPAddress ip;
-    private readonly int port;  
     private readonly CancellationTokenSource cancellationToken;
     private readonly List<Task> clients;
     public Server(IPAddress ip, int port)
@@ -53,10 +51,10 @@ public class Server
        await writer.WriteAsync(result);
     }
 
-    public async void Start()
+    public async Task Start()
     {
         listener.Start();
-        Console.WriteLine($"Listening on port {port}...");
+        Console.WriteLine($"Server started working...");
         while (!cancellationToken.IsCancellationRequested)
         {
             var socket = await listener.AcceptSocketAsync();
