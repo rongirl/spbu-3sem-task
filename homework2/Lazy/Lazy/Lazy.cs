@@ -12,7 +12,7 @@ public class Lazy<T> : ILazy<T>
     /// <summary>
     /// Функция вычисления
     /// </summary>
-    private Func<T?> supplier;
+    private Func<T?>? supplier;
 
     /// <summary>
     /// Результат вычисления
@@ -22,7 +22,7 @@ public class Lazy<T> : ILazy<T>
     /// <summary>
     /// Инициализация экземпляра класса 
     /// </summary>
-    public Lazy(Func<T?> supplier) => this.supplier = supplier;
+    public Lazy(Func<T?> supplier) => this.supplier = supplier ?? throw new ArgumentNullException();
 
     public T? Get()
     {
@@ -30,7 +30,10 @@ public class Lazy<T> : ILazy<T>
         {
             return result;
         }
-        result = supplier();
+        if (supplier != null)
+        {
+            result = supplier();
+        }
         supplier = null;
         isCalculated = true;
         return result;

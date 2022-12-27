@@ -12,7 +12,7 @@ public class LazyWithThreads<T> : ILazy<T>
     /// <summary>
     /// Функция вычисления
     /// </summary>
-    private Func<T?> supplier;
+    private Func<T?>? supplier;
 
     /// <summary>
     /// Результат вычисления
@@ -23,7 +23,7 @@ public class LazyWithThreads<T> : ILazy<T>
     /// <summary>
     /// Инициализация экземпляра класса 
     /// </summary>
-    public LazyWithThreads(Func<T?> supplier) => this.supplier = supplier;
+    public LazyWithThreads(Func<T?> supplier) => this.supplier = supplier ?? throw new ArgumentNullException();
 
     public T? Get()
     {
@@ -37,7 +37,10 @@ public class LazyWithThreads<T> : ILazy<T>
             {
                 return result;
             }
-            result = supplier();
+            if (supplier != null)
+            {
+                result = supplier();
+            }
             supplier = null;
             isCalculated = true;
             return result;
