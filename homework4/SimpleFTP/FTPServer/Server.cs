@@ -3,19 +3,29 @@ using System.Net.Sockets;
 
 namespace FTPServer;
 
+/// <summary>
+/// Implementation of server
+/// </summary>
 public class Server
 { 
     private readonly TcpListener listener;
     private readonly CancellationTokenSource cancellationToken;
     private readonly List<Task> clients;
-    public Server(IPAddress ip, int port)
+
+    /// <summary>
+    /// nitializes an Instance of the Server Class
+    /// </summary>
+    /// <param name="port">Port</param>
+    public Server(int port)
     {
-        listener = new TcpListener(ip, port);
+        listener = new TcpListener(IPAddress.Any, port);
         cancellationToken = new CancellationTokenSource();
-        clients = new List<Task>(); 
-       
+        clients = new List<Task>();
     }
 
+    /// <summary>
+    /// Performs Get command
+    /// </summary>
     private static async Task Get(StreamWriter writer, string path)
     {
         if (!File.Exists(path))
@@ -29,6 +39,9 @@ public class Server
         await reader.CopyToAsync(writer.BaseStream);
     }
 
+    /// <summary>
+    /// Performs List command
+    /// </summary>
     private static async Task List(StreamWriter writer, string path)
     {
         if (!Directory.Exists(path))
@@ -51,13 +64,17 @@ public class Server
        await writer.WriteAsync(result);
     }
 
+    /// <summary>
+    /// Starts working
+    /// </summary>
+    /// <returns></returns>
     public async Task Start()
     {
         listener.Start();
         Console.WriteLine($"Server started working...");
         while (!cancellationToken.IsCancellationRequested)
         {
-            var socket = await listener.AcceptSocketAsync();
+           using var socket = await listener.AcceptSocketAsync(cancellationToken.Token);
             var client = Task.Run(async () => {
                 var stream = new NetworkStream(socket);
                 var reader = new StreamReader(stream);
@@ -81,6 +98,9 @@ public class Server
         Task.WaitAll(clients.ToArray());
     }
 
+    /// <summary>
+    /// Stop working
+    /// </summary>
    public void Stop()
     {
         cancellationToken.Cancel();
