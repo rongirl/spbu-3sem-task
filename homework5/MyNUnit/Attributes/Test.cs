@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Attributes;
 
+/// <summary>
+/// Attribute for tests
+/// </summary>
 [AttributeUsage(AttributeTargets.Method)]
 public class Test : Attribute
 {
