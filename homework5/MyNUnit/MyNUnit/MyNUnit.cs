@@ -1,9 +1,9 @@
-﻿using Attributes;
+﻿namespace MyNUnitSpace;
+
+using Attributes;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
-
-namespace MyNUnitSpace;
 
 /// <summary>
 /// NUnit class
@@ -37,7 +37,9 @@ public class MyNUnit
                 filesWithoutRepeats.Add(file, Path.GetFileName(file));
             }
         }
-        var classes = filesWithoutRepeats.Keys.Select(Assembly.LoadFrom)
+        var classes = filesWithoutRepeats.Keys
+            .AsParallel()
+            .Select(Assembly.LoadFrom)
             .SelectMany(a => a.ExportedTypes)
             .Where(t => t.IsClass);
         var classesWithTests =
@@ -73,7 +75,7 @@ public class MyNUnit
             {
                 method.Invoke(null, null);
             }
-            catch (Exception ex)
+            catch (TargetInvocationException ex)
             {
                 throw new AggregateException(ex);
             }
@@ -121,14 +123,13 @@ public class MyNUnit
             if (attribute != null && attribute.Expected != null)
             {
                 testsInfo.Enqueue(new TestInfo(
-                method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Failed.ToString()));
+                    method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Failed.ToString()));
             }
             else
             {
                 testsInfo.Enqueue(new TestInfo(
-               method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Passed.ToString()));
+                    method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Passed.ToString()));
             }
-
         }
         catch (Exception e)
         {
@@ -136,12 +137,12 @@ public class MyNUnit
             if (attribute != null && e.InnerException != null && e.InnerException.GetType() != attribute.Expected)
             {
                 testsInfo.Enqueue(new TestInfo(
-                method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Failed.ToString()));
+                    method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Failed.ToString()));
             }
             else
             {
                 testsInfo.Enqueue(new TestInfo(
-              method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Passed.ToString()));
+                    method.Name, stopWatch.ElapsedMilliseconds, null, TestState.Passed.ToString()));
             }
         }
         try
