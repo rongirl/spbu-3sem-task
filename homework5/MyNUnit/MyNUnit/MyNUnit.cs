@@ -36,7 +36,6 @@ public class MyNUnit
             {
                 filesWithoutRepeats.Add(file, Path.GetFileName(file));
             }
-
         }
         var classes = filesWithoutRepeats.Keys
             .AsParallel()
