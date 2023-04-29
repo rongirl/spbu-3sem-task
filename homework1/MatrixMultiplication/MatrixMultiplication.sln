@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixMultiplication", "MatrixMultiplication\MatrixMultiplication.csproj", "{A3AD0ABE-B8C4-4048-9435-993EB3C624ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixMultiplicationTest", "MatrixMultiplicationTest\MatrixMultiplicationTest.csproj", "{31FF787F-E430-49C2-85AB-60662C19ED20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3AD0ABE-B8C4-4048-9435-993EB3C624ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3AD0ABE-B8C4-4048-9435-993EB3C624ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3AD0ABE-B8C4-4048-9435-993EB3C624ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AD0ABE-B8C4-4048-9435-993EB3C624ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31FF787F-E430-49C2-85AB-60662C19ED20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FF787F-E430-49C2-85AB-60662C19ED20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FF787F-E430-49C2-85AB-60662C19ED20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FF787F-E430-49C2-85AB-60662C19ED20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F94CD329-8835-4A84-A6F8-61CC20B9B8AC}
+	EndGlobalSection
+EndGlobal

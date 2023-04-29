@@ -1,0 +1,13 @@
+Count of experiments: 10 
+
+    Size:      Expected value (Sequential):    Standard deviation (Sequential):    Expected value (Parallel):    Standard deviation (Parallel):
+  100 x 100         0,046sec                          0,006sec                         0,013sec                        0,001sec    
+  200 x 200         0,324sec                          0,034sec                         0,073sec                        0,013sec    
+  300 x 300         1,067sec                          0,089sec                         0,226sec                        0,039sec    
+  400 x 400         2,465sec                          0,174sec                         0,512sec                        0,066sec    
+  500 x 500         5,668sec                          0,949sec                         1,108sec                        0,129sec    
+  600 x 600         9,573sec                          0,988sec                         1,863sec                        0,223sec    
+  700 x 700         14,872sec                          1,112sec                         2,864sec                        0,273sec    
+  800 x 800         23,375sec                          1,611sec                         4,448sec                        0,423sec    
+  900 x 900         34,448sec                          2,472sec                         5,958sec                        0,505sec    
+  1000 x 1000         48,227sec                          3,558sec                         8,160sec                        0,690sec    
